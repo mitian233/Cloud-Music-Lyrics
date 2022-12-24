@@ -31,7 +31,7 @@ def getlrc(musicId):
          logging.info('Successfully fetched lyric of '+musicId)
          if raw.status_code == 200:
             Buffer = io.BytesIO()
-            Buffer.write(raw.content)
+            Buffer.write(result.encode())
             Buffer.seek(0)
             return send_file(Buffer, attachment_filename=musicId + '.lrc', as_attachment=True)
          else:
