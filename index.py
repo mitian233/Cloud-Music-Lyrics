@@ -11,7 +11,7 @@ def index():
    json_data = {'status': 'ok'}
    return json_data
 
-@app.route("/lrc/<string:musicId>")
+@app.route("/lrcraw/<string:musicId>")
 def getlrc(musicId):
    if (musicId == ''):
       abort(404)
@@ -31,13 +31,13 @@ def getlrc(musicId):
          logging.info('Successfully fetched lyric of '+musicId)
          return result
 
-@app.route("/lrc/<string:musicId>.lrc")
+@app.route("/lrcfile/<string:musicId>")
 def getlrcfile(musicId):
    if (musicId == ''):
       abort(500)
    else:
       try:
-         r = requests.get('https://cloudmusic.mikan.ac.cn/lrc/' + musicId, headers=ua)
+         r = requests.get('https://cloudmusic.mikan.ac.cn/lrcraw/' + musicId, headers=ua)
       finally:
          if r.status_code == 200:
             Buffer = io.BytesIO()
